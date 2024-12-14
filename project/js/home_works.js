@@ -1,25 +1,35 @@
-const parentBlock= document.querySelector(".parent_block")
-const childBlock = document.querySelector(".child_block")
+const parentBlock = document.querySelector(".parent_block");
+const childBlock = document.querySelector(".child_block");
 
-let positionX = 0
-let positionY = 0
+let positionX = 0;
+let positionY = 0;
 
-const maxWidth = parentBlock.offsetWidth - childBlock.offsetWidth
-const maxHeight = parentBlock.offsetHeight - childBlock.offsetHeight
+const maxWidth = parentBlock.offsetWidth - childBlock.offsetWidth;
+const maxHeight = parentBlock.offsetHeight - childBlock.offsetHeight;
 
 const moveBlock = () => {
-    if (positionX < maxWidth) {
-        positionX ++
+    if (positionX < maxWidth && positionY === 0) {
 
-    } else if (positionX >= maxWidth && positionX < maxHeight) {
-        positionY ++
+        positionX++;
+    } else if (positionX === maxWidth && positionY < maxHeight) {
 
+        positionY++;
+    } else if (positionY === maxHeight && positionX > 0) {
 
+        positionX--;
+    } else if (positionX === 0 && positionY > 0) {
+
+        positionY--;
     }
+
     childBlock.style.left = `${positionX}px`;
     childBlock.style.top = `${positionY}px`;
+
     requestAnimationFrame(moveBlock);
-}
+};
+
+moveBlock();
+
 
 moveBlock();
 
@@ -73,3 +83,36 @@ class GmailValidator {
 
 
 const gmailValidator = new GmailValidator("#gmail_input", "#gmail_button", "#gmail_result");
+
+
+
+const seconds = document.querySelector("#seconds");
+const startButton = document.querySelector("#start");
+const stopButton = document.querySelector("#stop");
+const resetButton = document.querySelector("#reset");
+
+let interval;
+let countSeconds = 0;
+
+startButton.onclick = () => {
+
+    if (!interval) {
+        interval = setInterval(() => {
+            countSeconds++;
+            seconds.innerHTML = countSeconds;
+        }, 1000);
+    }
+};
+
+stopButton.onclick = () => {
+    clearInterval(interval);
+    interval = null;
+};
+
+resetButton.onclick = () => {
+    clearInterval(interval);
+    interval = null;
+    countSeconds = 0;
+    seconds.innerHTML = countSeconds;
+};
+
