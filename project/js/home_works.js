@@ -65,7 +65,7 @@ class GmailValidator {
         this.emailInput.style.borderColor = "green";
     }
 
-    // Метод для отображения ошибки
+    
     showError(message) {
         this.resultSpan.textContent = message;
         this.resultSpan.style.color = "red";
